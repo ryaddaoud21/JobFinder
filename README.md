@@ -1,2 +1,0 @@
-# JobFinder
-We have all the newest jobs posted on all the sites With sophisticated technology we are able to present in real-time almost every newly listed job that has just been posted with thousands of sites. We simply aggregate (that is where we derive our name) each new job as it is posted with all the major sites.  Now you don't have to spend hours searching thousands of individual job boards, career sites, job aggregators, local newspapers, and corporate sites.
