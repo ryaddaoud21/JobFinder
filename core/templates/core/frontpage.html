@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 class="substitle has-text-centered">Newest jobs </h2>
+<hr>
+{% if request.user.is_authenticated %}
+
+    {% if user.userprofile.is_employer %}
+
+        {% for job in jobs %}
+
+            <div class="column is-4">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ job.title }}</p>
+                                <p class="subtitle is-6">{{ job.created_at }}</p>
+                            </div>
+
+
+                        </div>
+
+                        <div class="content">
+                            {{ job.short_description }}
+                            <hr>
+                            <a class="button" href="{% url 'job_details' job.id %}">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+                {% else %}
+                    {% for job in jobs %}
+                        <div class="column is-4">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p class="title is-4">{{ job.title }}</p>
+                                            <p class="subtitle is-6">{{ job.created_at }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="content">
+                                        {{ job.short_description }}
+                                        <hr>
+                                        <a class="button is-info" href="{% url 'job_details' job.id %}">View</a>
+                                        <a class="button is-success" href= "{% url 'apply_for_job' job.id %}"> apply </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+{% else %}
+ {% for job in jobs %}
+            <div class="column is-4">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+
+                            <div class="media-content">
+
+                                <p class="title ">{{ job.title }}</p>
+                                <p class="subtitle is-6">{{ job.created_at }}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="content">
+                            {{ job.short_description }}
+                            <a class="button" href="{% url 'job_details' job.id %}">View</a>
+                            <a class="button" href="{% url 'login'  %}">Apply </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+        {% endif %}
+
+
+<style>
+      .card{
+            width: 550px;
+            color: white;
+            background-color: #7eca9c;
+        }.
+      .title{
+       font-family: Arial,
+       font-size: 10px,
+        color: white;
+        }.
+
+ </style>
+
+{% endblock %}

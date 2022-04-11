@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<hr>
+    {% if userprofile.is_employer %}
+<p class="title is-1 is-spaced">Jobs</p>
+
+        {% for job in request.user.jobs.all %}
+            <div class="column is-4" >
+        <div class="box" >
+            <div class="card-content">
+                <div class="media" >
+                    <div class="media-content">
+                    <p class="title is-4 "> {{job.title}}</p>
+                    <p class="title is-6"> {{job.created_at}}</p>
+                    </div>
+                    <div class="content">
+                        {{job.show_description}}
+                        <hr>
+                        <a  CLASS="button is_info " href="{% url 'view_job_dashboard' job.id %}"> View </a>
+                        <a  class="button is_info" href="{% url 'edit_job' job.id %}">Edit </a>
+                        <a  class="button is_danger" href="{% url 'delete_job' job.id %}">Delete</a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        {% empty %}
+            <p>You don't have any jobs yet...</p>
+        {% endfor %}
+    {% else %}
+             <h2 class="subtitle">Applications</h2>
+        <p> You have applied for : </p>
+        {% for application in request.user.applications.all %}
+             <div class="column is-4" >
+        <div class="card" >
+            <div class="card-content">
+                <div class="media" >
+                    <div class="media-content">
+                        <a href="{% url 'view_application' application.id %}">{{ application.job.title }} </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        {% empty %}
+            <p>You haven't applied for any jobs yet...</p>
+        {% endfor %}
+    {% endif %}
+<style>
+    .box{
+            width: 600px;
+            color: black;
+            background-color: #d8e3e7;
+        }
+        .media-content{
+                    width: 500px;
+
+        }
+</style>
+{% endblock %}

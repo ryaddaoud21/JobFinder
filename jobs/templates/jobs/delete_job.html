@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="task"><h5><p>Voulez-vous vraiment supprimer   <strong>  "{{job.title}}" </strong>?</p> </h5></div>
+<br>
+<form method="POST" action="">
+	{% csrf_token %}
+    <div class="content">
+	<input class="button is-info" type="submit" name="Confirm">
+        <a class="button is-danger" href="{% url 'dashboard' %}" > Cancel</a> </div>
+
+    </div>
+</form>
+
+{% endblock  %}

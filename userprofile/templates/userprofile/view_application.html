@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<hr>
+<p class="title is-1 is-spaced"> View application</p>
+
+<hr>
+<hr>
+
+
+        <div class="box">
+        <div>
+        <h2 class="subtitle"> Job : {{ application.job.title }}</h2>
+        <small>Date added: {{ application.created_at }}</small>
+        </div>
+<br>
+
+            {% if application.image %}
+            <figure class="image is-64x64">
+             <img class="is-rounded"   src="{{ application.image.url}}" alt="connect">
+            </figure>
+            {% else %}
+                no image
+            {% endif %}
+<br><br>
+
+    <p><strong>Name: </strong><br>{{ application.full_name }}</p>
+    <p><strong>Phone: </strong><br>{{ application.phone_number }}</p>
+    <p><strong>Content: </strong><br>{{ application.content }}</p>
+    <p><strong>Experience: </strong><br>{{ application.experience }}</p>
+
+        </div>
+<hr>
+<hr>
+    <h2 class="subtitle">Conversation</h2>
+ {% for message in application.conversationmessages.all %}
+<div class="box">
+  <b>{{ message.created_by.username }} - {{ message.created_at|timesince }} ago</b><br>
+
+            {{ message.content }}
+
+</div>
+
+    {% empty %}
+        <p>No messages yet...</p>
+
+        <hr>
+    {% endfor %}
+
+    <form method="post" action=".">
+        {% csrf_token %}
+
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" placeholder="Your message" name="content" id="id_content"></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-success">Send</button>
+            </div>
+        </div>
+    </form>
+
+    <style>
+        .box{
+            width: 300px;
+            color: black;
+            background-color: #d8e3e7;
+        }.subtitle{
+            color: black;
+        }.field{
+            color: black;
+        }
+
+    </style>
+{% endblock %}
+

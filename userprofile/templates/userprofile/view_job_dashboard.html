@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<br>
+<p class="title is-4 is-spaced"> Applicants List for : {{ job.title }} </p>
+
+
+
+    <small>Date added: {{ job.created_at }}</small>
+
+    {% for application in job.applications.all %}
+    <div class="box">
+        <strong> <h3> {{ application.created_by.username}}</h3> </strong>
+        <br>
+         <a class="button is-success" href="{% url 'view_application' application.id %}" > chat </a>
+    </div>
+    {% endfor %}
+ <style>
+      .box{
+            width: 550px;
+            color: black;
+            background-color: #d8e3e7;
+        }
+ </style>
+
+
+
+
+
+
+
+{% endblock %}

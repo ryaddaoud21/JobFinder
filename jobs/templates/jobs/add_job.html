@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<hr>
+        <h1 class="title">Add job</h1>
+
+        <form  method="post" action=".">
+            {% csrf_token %}
+            {% if form.errors %}
+                {% for error in form.errors %}
+                    <div class="notificationis-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="field">
+                <label>Salle</label>
+
+                <div class="control">
+                    <input class="input" type="text" name="title" id="id_title" v-model="title" placeholder="numero de salle ...">
+                </div>
+            </div>
+
+                 <div class="field">
+                     <div class="control">
+                        <button class="button is success"> submit </button>
+                     </div>
+                 </div>
+        </form>
+
+{% endblock %}
